@@ -10,6 +10,7 @@
 #include <quickjs.h>
 
 const char MOE_PROC_MACRO_DERIVES_MACRO_NAME[] = "MOE_PROC_MACRO_DERIVES";
+const char MOE_PROC_MACRO_DERIVES_ENUM_MACRO_NAME[] = "MOE_PROC_MACRO_DERIVES_ENUM";
 const int MOE_PROC_MACRO_MAX_ARG_NUM = 8;
 const int MOE_PROC_MACRO_MAX_DERIVE_ITEM_NUM = 8;
 
@@ -338,7 +339,7 @@ int try_parse_derived_struct_body(
     }
 
     if (lex->token != CLEX_id ||
-        strcmp(lex->string, "struct") != 0) {
+        (strcmp(lex->string, "struct") != 0 && strcmp(lex->string, "enum") != 0)) {
         return 0;
     }
 
@@ -387,7 +388,8 @@ moe_derived_struct_t* parse_derived_struct(stb_lexer* lex) {
         return NULL;
     }
 
-    if (strcmp(lex->string, MOE_PROC_MACRO_DERIVES_MACRO_NAME) != 0) {
+    if (strcmp(lex->string, MOE_PROC_MACRO_DERIVES_MACRO_NAME) != 0 &&
+        strcmp(lex->string, MOE_PROC_MACRO_DERIVES_ENUM_MACRO_NAME) != 0) {
         return NULL;
     }
 

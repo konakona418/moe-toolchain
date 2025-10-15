@@ -7,6 +7,10 @@
     struct struct_name;                                      \
     void _moe_proc_macro_##struct_name##_derive_##trait_name##_impl(struct struct_name* instance_ptr __VA_OPT__(, __VA_ARGS__));
 
+#define MOE_PROC_MACRO_DERIVES_ENUM(enum_name, trait_name, ...) \
+    enum enum_name;                                             \
+    void _moe_proc_macro_##enum_name##_derive_##trait_name##_impl(enum enum_name value __VA_OPT__(, __VA_ARGS__));
+
 #define MOE_PROC_MACRO_CALL(struct_name, trait_name, instance_ptr, ...) \
     _moe_proc_macro_##struct_name##_derive_##trait_name##_impl(instance_ptr __VA_OPT__(, __VA_ARGS__));
 
